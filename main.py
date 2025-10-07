@@ -6,7 +6,6 @@ import pandas as pd
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from google.oauth2.service_account import Credentials
-from telegram import KeyboardButton
 from aiogram.types import FSInputFile
 
 
