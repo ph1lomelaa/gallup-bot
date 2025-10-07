@@ -110,11 +110,28 @@ def draw_strengths_chart(name, ranked_list):
         ("Strategic", 1119.7, 588.6, 151.6, 127),
     ]
 
-    # === Шрифты ===
-    font_name = ImageFont.truetype("ArialMdm.ttf", 14)
-    font_num_big = ImageFont.truetype("ArialMdm.ttf", 33)
-    font_num_small = ImageFont.truetype("ArialMdm.ttf", 21)
-    font_header = ImageFont.truetype("ArialMdm.ttf", 36)
+from PIL import Image, ImageDraw, ImageFont
+import os
+
+def draw_strengths_chart(name, ranked_list):
+    background_path = "Your CliftonStrengths by Domain.png"
+    output_path = f"{name}.png"
+
+    FONT_PATH = os.path.join(os.path.dirname(__file__), "ArialMdm.ttf")
+
+    def load_font(size):
+        try:
+            return ImageFont.truetype(FONT_PATH, size)
+        except Exception:
+            print("⚠️ Файл шрифта не найден, используем стандартный")
+            return ImageFont.load_default()
+
+    font_name = load_font(14)
+    font_num_big = load_font(33)
+    font_num_small = load_font(21)
+    font_header = load_font(36)
+
+
 
     # === Настройка изображения ===
     img = Image.open(background_path).convert("RGBA")
