@@ -8,8 +8,6 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from google.oauth2.service_account import Credentials
 from aiogram.types import FSInputFile
 
-
-
 API_TOKEN = "8429822904:AAGDA5mJUxxcLUayMosT_qTNNUKOyYqhM0o"
 SHEET_ID = "11ZYmnqfluiIXmTpQ5Ppg5vNy4lat8xYEeZCUaw-ZaNE"
 
