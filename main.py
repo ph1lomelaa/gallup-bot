@@ -111,10 +111,10 @@ def draw_strengths_chart(name, ranked_list):
     ]
 
     # === Шрифты ===
-    font_name = ImageFont.truetype("arial.ttf", 14)
-    font_num_big = ImageFont.truetype("arial.ttf", 33)
-    font_num_small = ImageFont.truetype("arial.ttf", 21)
-    font_header = ImageFont.truetype("arial.ttf", 36)
+    font_name = ImageFont.truetype("ArialMdm.ttf", 14)
+    font_num_big = ImageFont.truetype("ArialMdm.ttf", 33)
+    font_num_small = ImageFont.truetype("ArialMdm.ttf", 21)
+    font_header = ImageFont.truetype("ArialMdm.ttf", 36)
 
     # === Настройка изображения ===
     img = Image.open(background_path).convert("RGBA")
