@@ -196,9 +196,15 @@ async def show_list(callback: types.CallbackQuery):
     builder = InlineKeyboardBuilder()
     for n in names:
         builder.button(text=n, callback_data=f"show_{n}")
+    builder.button(text="⬅️ Назад", callback_data="back_to_start")  # добавлена кнопка внизу
     builder.adjust(2)
     await callback.message.answer("👥 Выберите участника:", reply_markup=builder.as_markup())
 
+# === Назад в начало ===
+@dp.callback_query(F.data == "back_to_start")
+async def back_to_start(callback: types.CallbackQuery):
+    await start(callback.message)
+    
 # === Показ результатов ===
 @dp.callback_query(F.data.startswith("show_"))
 async def show_result(callback: types.CallbackQuery):
