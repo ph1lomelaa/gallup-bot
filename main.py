@@ -16,8 +16,11 @@ SHEET_ID = "11ZYmnqfluiIXmTpQ5Ppg5vNy4lat8xYEeZCUaw-ZaNE"
 
 # Авторизация
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
-creds = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
-gc = gspread.authorize(creds)
+import os, json
+creds_json = os.getenv("GOOGLE_CREDS_JSON")
+creds_dict = json.loads(creds_json)
+creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
