@@ -1,0 +1,6 @@
+__pycache__/
+.idea/
+*.pyc
+*.png
+credentials.json
+.env
