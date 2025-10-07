@@ -13,10 +13,32 @@ SHEET_ID = "11ZYmnqfluiIXmTpQ5Ppg5vNy4lat8xYEeZCUaw-ZaNE"
 
 # Авторизация
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
-import os, json
-creds_json = os.getenv("GOOGLE_CREDS_JSON")
-creds_dict = json.loads(creds_json)
-creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+# было:
+# creds_json = os.getenv("GOOGLE_CREDS_JSON")
+# creds_dict = json.loads(creds_json)
+# creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+
+# стало:
+import os, json, base64
+from google.oauth2.service_account import Credentials
+
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+
+def load_service_account_credentials():
+    b64 = os.getenv("GOOGLE_CREDS_B64")
+    raw = os.getenv("GOOGLE_CREDS_JSON")
+    if b64:
+        data = base64.b64decode(b64).decode("utf-8")
+        info = json.loads(data)
+        return Credentials.from_service_account_info(info, scopes=SCOPES)
+    if raw:
+        # допускаем как «плоский» JSON в одну строку, так и многострочный
+        info = json.loads(raw)
+        return Credentials.from_service_account_info(info, scopes=SCOPES)
+    raise RuntimeError("Service account creds not provided")
+
+creds = load_service_account_credentials()
+gc = gspread.authorize(creds)
 
 
 bot = Bot(token=API_TOKEN)
